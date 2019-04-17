@@ -1,34 +1,49 @@
 const config = {
     headers: {
-        "user-key": ''
+        "user-key": '';
     }
 };
 
+let lat = null;
+let long = null;
+
 Vue.component('form-comp', {
+    template: `
+        <div>
+            <form class="review-form" @submit.prevent="onSubmit">
+                <p>
+                    <label for="distance">Distance:</label>
+                    <input id="distance" v-model="distance">
+                </p>
+                <p>
+                    <label for="cuisine">Cuisine:</label>
+                    <input id="cuisine" v-model="cuisine">
+                </p>
+                <p>
+                    <input type="submit" value="Submit">  
+                </p>    
+            </form>
+        </div>
+    `,
     data() {
         return {
             distance: 5,
-            lat: null,
-            long: null,
             cuisine: null,
         }
     },
-    template: `
-        <div>
-            Distance
-            <input type="text" v-model="distance" required></input><br>
-            Cuisine
-            <input type="text" v-model="cuisine" required></input><br>
-            <button>Find</button>
-        </div>
-    `,
     mounted () {
-        let dist = this.distance * 1609.34;
         navigator.geolocation.getCurrentPosition(function(position) {
-            this.lat = position.coords.latitude;
-            this.long = position.coords.longitude;
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            console.log(lat, long);
+        })
+    },
+    methods: {
+        onSubmit() {
+            console.log("button clicked");
+            let dist = this.distance * 1609.34;
             axios
-            .get('https://developers.zomato.com/api/v2.1/search?lat=' + this.lat + '&lon=' + this.long + '&radius=' + dist + '&sort=cost', config)
+            .get('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&sort=rating', config)
             .then(response => {
                 // let rand = Math.floor(Math.random() * 20);
                 // console.log(rand);
@@ -41,8 +56,11 @@ Vue.component('form-comp', {
             .catch(error => {
                 console.log(error)
             })
-        })
-    },
+            .finally( () => {
+                console.log('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&sort=rating')
+            }) 
+        }
+    }
 })
 
 var app = new Vue({
