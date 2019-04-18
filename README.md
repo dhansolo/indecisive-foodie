@@ -1,2 +1,2 @@
 # Indecisive-Foodie
-Using Google's Places API to help indecisive folk choose where to eat
+Using the Zomato API to help indecisive folk choose where to eat
