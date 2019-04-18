@@ -12,12 +12,12 @@ Vue.component('form-comp', {
         <div>
             <form class="review-form" @submit.prevent="onSubmit">
                 <p>
-                    <label for="distance">Distance:</label>
-                    <input id="distance" v-model="distance" required>
+                    <label for="distance">How far are you willing to go?</label>
+                    <input id="distance" v-model="distance" required> Miles
                 </p>
                 <p>
-                    <label for="cuisine">Cuisine:</label>
-                    <input id="cuisine" v-model="cuisine">
+                    <label for="cuisine">Whats on your mind?</label>
+                    <input id="cuisine" v-model="cuisine" required>
                 </p>
                 <p>
                     <input type="submit" value="Submit">  
@@ -46,8 +46,9 @@ Vue.component('form-comp', {
             app.searched = false;
             let dist = this.distance * 1609.34;
             axios
-            .get('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&sort=rating', config)
+            .get('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&q=' + this.cuisine + '&sort=rating', config)
             .then(response => {
+                console.log('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&q=' + this.cuisine + '&sort=rating');
                 let rand = Math.floor(Math.random() * 20);
                 console.log(response.data.restaurants[rand].restaurant);
                 app.restaurant_name = response.data.restaurants[rand].restaurant.name;
