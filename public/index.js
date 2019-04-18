@@ -1,6 +1,6 @@
 const config = {
     headers: {
-        "user-key": '';
+        "user-key": ''
     }
 };
 
@@ -13,7 +13,7 @@ Vue.component('form-comp', {
             <form class="review-form" @submit.prevent="onSubmit">
                 <p>
                     <label for="distance">Distance:</label>
-                    <input id="distance" v-model="distance">
+                    <input id="distance" v-model="distance" required>
                 </p>
                 <p>
                     <label for="cuisine">Cuisine:</label>
@@ -27,7 +27,7 @@ Vue.component('form-comp', {
     `,
     data() {
         return {
-            distance: 5,
+            distance: null,
             cuisine: null,
         }
     },
@@ -40,29 +40,34 @@ Vue.component('form-comp', {
     },
     methods: {
         onSubmit() {
-            console.log("button clicked");
+            app.restaurant_name = null;
+            app.address = null;
+            app.cuisines = null;
+            app.searched = false;
             let dist = this.distance * 1609.34;
             axios
             .get('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&sort=rating', config)
             .then(response => {
-                // let rand = Math.floor(Math.random() * 20);
-                // console.log(rand);
-                // this.message = response.data.restaurants;
-                // this.name = response.data.restaurants[rand].restaurant.name;
-                // this.cuisine = response.data.restaurants[rand].restaurant.cuisines;
-                // console.log(response.data);
-                console.log(response);
+                let rand = Math.floor(Math.random() * 20);
+                console.log(response.data.restaurants[rand].restaurant);
+                app.restaurant_name = response.data.restaurants[rand].restaurant.name;
+                app.address = response.data.restaurants[rand].restaurant.location.address;
+                app.cuisines = response.data.restaurants[rand].restaurant.cuisines;
+                app.searched = true;
             })
             .catch(error => {
                 console.log(error)
             })
-            .finally( () => {
-                console.log('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&sort=rating')
-            }) 
         }
     }
 })
 
 var app = new Vue({
     el: '#app',
+    data: {
+        restaurant_name: 'hello',
+        address: null,
+        cuisines: null,
+        searched: false,
+    }
 })

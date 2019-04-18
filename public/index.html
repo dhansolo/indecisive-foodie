@@ -12,6 +12,9 @@
     <body>
         <div id="app">
             <form-comp></form-comp>
+            <div v-if="searched">{{ restaurant_name }}</div>
+            <div v-if="searched">{{ address }}</div>
+            <div v-if="searched">{{ cuisines }}</div>
         </div>
         <script src="index.js"></script>
     </body>
