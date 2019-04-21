@@ -62,12 +62,17 @@ Vue.component('form-comp', {
                     // console.log('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + dist + '&q=' + this.cuisine + '&sort=rating');
                     let rand = Math.floor(Math.random() * response.data.restaurants.length);
                     // console.log(rand);
-                    console.log(response.data.restaurants[rand].restaurant);
+                    // console.log(response.data.restaurants[rand].restaurant);
                     app.restaurant_name = response.data.restaurants[rand].restaurant.name;
                     app.address = response.data.restaurants[rand].restaurant.location.address;
                     app.cuisines = response.data.restaurants[rand].restaurant.cuisines;
                     app.link = response.data.restaurants[rand].restaurant.url;
-                    app.map = "https://www.google.com/maps/embed/v1/search?key=&q=" + app.restaurant_name + "&center=" + response.data.restaurants[rand].restaurant.location.latitude + "," + response.data.restaurants[rand].restaurant.location.longitude + "&maptype=roadmap&zoom=15";
+                    let restaurant_lat = response.data.restaurants[rand].restaurant.location.latitude;
+                    let restaurant_long = response.data.restaurants[rand].restaurant.location.longitude;
+                    let updated_rest_name = app.restaurant_name.replace(/[^a-zA-Z ]/g, "").split(' ').join('+');
+                    console.log(updated_rest_name);
+                    app.map = "https://www.google.com/maps/embed/v1/search?key=&q=" + updated_rest_name + "&center=" + restaurant_lat + "," + restaurant_long + "&maptype=roadmap&zoom=15";
+                    console.log(app.map);
                     app.results_found = true;
                 } else {
                     app.results_not_found = true;
