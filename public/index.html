@@ -14,14 +14,17 @@
           rel="stylesheet"
           href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
         />
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <div id="app">
-            <div v-if="location_found">Current Location: {{ location }}</div>
-            <form-comp v-if="location_found"/>
-            <div v-if="results_found">{{ restaurant_name }}</div>
+            <div v-if="location_found">Current Location: {{ location }}</div><br>
+            <form-comp v-if="location_found"></form-comp>
+            <a v-if="results_found" v-bind:href="link">{{ restaurant_name }}</a>
             <div v-if="results_found">{{ address }}</div>
             <div v-if="results_found">{{ cuisines }}</div>
+            <iframe v-if="results_found" v-bind:src="map" width="450" height="250" frameborder="0" style="border:0"></iframe>
             <div v-if="results_not_found">No Results</div>
         </div>
         <script src="index.js"></script>
