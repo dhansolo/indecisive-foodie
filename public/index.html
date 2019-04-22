@@ -24,9 +24,12 @@
             <a v-if="results_found" v-bind:href="link">{{ restaurant_name }}</a>
             <div v-if="results_found">{{ address }}</div>
             <div v-if="results_found">{{ cuisines }}</div>
-            <iframe v-if="results_found" v-bind:src="map" width="700" height="400" frameborder="0" style="border:0"></iframe>
+            <iframe v-if="results_found" v-bind:src="map" width="450" height="250" frameborder="0" style="border:0"></iframe>
             <div v-if="results_not_found">No Results</div>
         </div>
+        <footer>
+
+        </footer>
         <script src="index.js"></script>
         <script src="//unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
         <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>

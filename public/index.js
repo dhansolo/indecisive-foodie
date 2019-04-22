@@ -1,10 +1,10 @@
 const config = {
     headers: {
-        "user-key": ''
+        "user-key": "507285872fa28fa2152dcff3f6f75625"
     }
 };
 
-const map_key = "";
+const map_key = "AIzaSyD_W6e87BFbtS5kcwXRgJUrz_uhLI0zdCk";
 let lat = null;
 let long = null;
 
