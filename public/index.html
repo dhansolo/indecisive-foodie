@@ -23,7 +23,7 @@
 
         </div>
         <div id="app">
-            <div v-if="location_found">Current Location: {{ location }}</div><br>
+            <div v-if="location_found">Current Location: {{ location }} | <img v-bind:src="widget1" width="100" height="24"></div><br>
             <form-comp v-if="location_found"></form-comp>
             <a v-if="results_found" v-bind:href="link">{{ restaurant_name }}</a>
             <div v-if="results_found">{{ address }}</div>
@@ -32,7 +32,7 @@
             <div v-if="results_not_found">No Results</div>
         </div>
         <footer>
-            <p>Created by <a href="https://github.com/dhansolo">David Han</a> | Powered by Zomato & Google Maps | Background by <a href="https://unsplash.com/@ninjason">Jason Leung</a></p>
+            <div>Created by <a href="https://github.com/dhansolo">David Han</a> | Powered by Zomato & Google Maps | Background by <a href="https://unsplash.com/@ninjason">Jason Leung</a></div>
         </footer>
         <script src="index.js"></script>
         <script src="//unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>

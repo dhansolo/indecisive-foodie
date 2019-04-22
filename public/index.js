@@ -93,6 +93,7 @@ var app = new Vue({
         cuisines: null,
         link: null,
         map: null,
+        widget1: null,
         results_found: false,
         results_not_found : false,
         location_found: false
@@ -101,6 +102,8 @@ var app = new Vue({
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude;
             long = position.coords.longitude;
+            console.log(lat, long);
+            app.widget1 = "https://www.zomato.com/widgets/foodie_widget_img.php?widget_type=3&lat=" + lat + "&lon=" + long;
             app.location_found = true;
         }, function(err) {
             if(err.code == err.PERMISSION_DENIED) {
