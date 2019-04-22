@@ -1,10 +1,10 @@
 const config = {
     headers: {
-        "user-key": "507285872fa28fa2152dcff3f6f75625"
+        "user-key": ""
     }
 };
 
-const map_key = "AIzaSyD_W6e87BFbtS5kcwXRgJUrz_uhLI0zdCk";
+const map_key = "";
 let lat = null;
 let long = null;
 
@@ -12,10 +12,12 @@ Vue.component('form-comp', {
     template: `
         <form class="review-form" @submit.prevent="onSubmit">
             <p>
-                <input id="distance" v-model="distance" required placeholder="How far are you willing to go?"> Miles
+                <label value>How far are you willing to travel?</label><br>
+                <input id="distance" v-model="distance" required placeholder="Distance in miles" type="number">
             </p>
             <p>
-                <input id="cuisine" v-model="cuisine" required placeholder="What's on your mind?">
+                <label value>What are you craving?</label><br>
+                <input id="cuisine" v-model="cuisine" required placeholder="i.e. Asian, Greek, etc.">
             </p>
             <p>
                 <input type="submit" value="Submit">  

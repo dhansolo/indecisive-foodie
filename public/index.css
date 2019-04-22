@@ -5,5 +5,17 @@ body {
     background-repeat: no-repeat;
     color: white;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 1%;
+    font-family: 'Source Sans Pro', sans-serif;
 }
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #CB202D;
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+  }
