@@ -1,8 +1,13 @@
+html {
+    height: 100%;
+}
+
 body {
     background: rgba(0, 0, 0, .8) url('images/restaurant.jpg');
     background-blend-mode: overlay;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100%;
     color: white;
     text-align: center;
     margin-top: 1%;

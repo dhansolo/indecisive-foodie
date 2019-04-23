@@ -59,7 +59,7 @@ Vue.component('form-comp', {
             .then(response => {
                 let results_length = response.data.restaurants.length;
                 if(results_length > 0) {
-                    // console.log(response);
+                    console.log(response);
                     let rand = Math.floor(Math.random() * response.data.restaurants.length);
                     let payload = response.data.restaurants[rand].restaurant;
                     // console.log(rand);
