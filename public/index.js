@@ -17,7 +17,10 @@ Vue.component('form-comp', {
             </p>
             <p>
                 <label value>What are you craving?</label><br>
-                <input id="cuisine" v-model="cuisine" required placeholder="i.e. Asian, Greek, etc.">
+                <select v-model="cuisine" required>
+                    <option disabled value="">Please select a cuisine</option>
+                    <option v-for="cuisine in app.query" v-bind:value="cuisine.cuisine.cuisine_name">{{ cuisine.cuisine.cuisine_name }}</option>
+                </select>
             </p>
             <p>
                 <input type="submit" value="Submit">  
@@ -43,23 +46,30 @@ Vue.component('form-comp', {
         .catch(error => {
             console.log(error)
         });
+        axios
+        .get('https://developers.zomato.com/api/v2.1/cuisines?lat=' + lat + '&lon=' + long, config) 
+        .then(response => {
+            if(response.status == 200) {
+                app.query = response.data.cuisines;
+            }
+        })
     },
     methods: {
         onSubmit() {
             app.restaurant_name = null;
             app.address = null;
-            app.cuisines = null;
             app.link = null;
             app.map = null;
             app.results_found = false;
             app.results_not_found = false;
             let meters = this.distance * 1609.34; // Meters to Miles
+            console.log('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + meters + '&q=' + this.cuisine + '&sort=rating');
             axios
             .get('https://developers.zomato.com/api/v2.1/search?lat=' + lat + '&lon=' + long + '&radius=' + meters + '&q=' + this.cuisine + '&sort=rating', config)
             .then(response => {
                 let results_length = response.data.restaurants.length;
                 if(results_length > 0) {
-                    console.log(response);
+                    // console.log(response);
                     let rand = Math.floor(Math.random() * response.data.restaurants.length);
                     let payload = response.data.restaurants[rand].restaurant;
                     // console.log(rand);
@@ -91,6 +101,7 @@ var app = new Vue({
         restaurant_name: null,
         address: null,
         cuisines: null,
+        query: null,
         link: null,
         map: null,
         widget1: null,

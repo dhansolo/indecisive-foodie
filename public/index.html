@@ -9,11 +9,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
-        <link
-          type="text/css"
-          rel="stylesheet"
-          href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
-        />
+        <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" href="index.css">
     </head>
@@ -29,6 +25,14 @@
             <div v-if="results_found">Cuisines: {{ cuisines }}</div><br>
             <iframe v-if="results_found" v-bind:src="map" width="450" height="250" frameborder="0" style="border:0"></iframe>
             <div v-if="results_not_found">No Results</div>
+
+            <b-form-group>
+                <b-form-input
+                  id="input"
+                  required
+                  placeholder="Enter name"
+                ></b-form-input>
+            </b-form-group>
         </div>
         <footer>
             <div>Created by <a href="https://github.com/dhansolo">David Han</a> | Powered by Zomato & Google Maps | Background by <a href="https://unsplash.com/@ninjason">Jason Leung</a></div>
